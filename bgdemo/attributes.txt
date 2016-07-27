@@ -1,0 +1,2 @@
+xgatt_battery 16
+test_c 20
