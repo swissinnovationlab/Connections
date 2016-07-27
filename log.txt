@@ -13,4 +13,62 @@ Wed 27 Jul 2016 10:21:31 AM CEST
 drop after running through few procedures
 added more timestamps into gatttool for better loging
 for now in while with 600 the duration is 2048ms
+
+some measurements of duration of while loop
+256 = 962ms
+512 = 1865
+1024 = 3675
+2048 = 7311
+4096 = 14628
+8192 = 29101
+16384 = written response never returned and its unresponsive to gatt commands
+after manual disconnect on connect attempt got: Error: connect error: Function not implemented (38)
+and after that connects and works normaly
+
+
+Wed 27 Jul 2016 10:52:37 AM CEST
+got a drop when writing the upper message
+a second drop while in procedure
+1469609589903: Request_send
+1469609595311: Disconnected
+
+if i got a disconnect while in procedure it wouldn't connect until the procedure finishes
+if after the 16384 procedure finishes (the LED turn off) the device wont response over GATT (i waited for more then 2 minutes after)
+the disconnect helped to connect again but with few attempts:
+
+[00:07:80:7F:29:03][LE]> characteristics 
+[00:07:80:7F:29:03][LE]> characteristics
+[00:07:80:7F:29:03][LE]> characteristics 
+[00:07:80:7F:29:03][LE]> characteristics
+[00:07:80:7F:29:03][LE]> characteristics
+[00:07:80:7F:29:03][LE]> characteristics
+[00:07:80:7F:29:03][LE]> characteristics 
+[00:07:80:7F:29:03][LE]> disconnect 
+1469610241063: Disconnected
+[00:07:80:7F:29:03][LE]> characteristics
+[00:07:80:7F:29:03][LE]> connect 
+1469610243759: Attempting to connect to 00:07:80:7F:29:03
+1469610245333: Disconnected
+[00:07:80:7F:29:03][LE]> connect
+1469610247224: Attempting to connect to 00:07:80:7F:29:03
+1469610248344: Connection successful
+1469610248693: Disconnected
+[00:07:80:7F:29:03][LE]> connect
+1469610250807: Attempting to connect to 00:07:80:7F:29:03
+1469610251634: Connection successful
+
 #will try to make a "connnection stress test" just to check for more drops
+
+
+Wed 27 Jul 2016 11:06:37 AM CEST
+a drop again
+[00:07:80:7F:29:03][LE]> characteristics
+handle: 0x0002, char properties: 0x02, char value handle: 0x0003, uuid: 00002a00-0000-1000-8000-00805f9b34fb
+handle: 0x0004, char properties: 0x02, char value handle: 0x0005, uuid: 00002a01-0000-1000-8000-00805f9b34fb
+handle: 0x0007, char properties: 0x02, char value handle: 0x0008, uuid: 00009100-0000-1000-8000-00805f9b34fb
+handle: 0x0009, char properties: 0x02, char value handle: 0x000a, uuid: 00009101-0000-1000-8000-00805f9b34fb
+handle: 0x000b, char properties: 0x02, char value handle: 0x000c, uuid: 00009106-0000-1000-8000-00805f9b34fb
+handle: 0x000f, char properties: 0x12, char value handle: 0x0010, uuid: 0000e101-0000-1000-8000-00805f9b34fb
+handle: 0x0013, char properties: 0x0a, char value handle: 0x0014, uuid: f1b41cde-dbf5-4acf-8679-ecb8b4dca6fe
+1469610386594: Disconnected
+[00:07:80:7F:29:03][LE]> 
