@@ -3,38 +3,38 @@ dim a(4)
 dim z(40)
 
 event system_boot(major ,minor ,patch ,build ,ll_version ,protocol_version ,hw )
-	#set to advertising mode
-	call gap_set_mode(gap_general_discoverable,gap_undirected_connectable)
-	
-	call hardware_io_port_config_direction(0, $04)
-	call hardware_io_port_write(0, $04, $00)
+  #set to advertising mode
+  call gap_set_mode(gap_general_discoverable,gap_undirected_connectable)
+
+  call hardware_io_port_config_direction(1, $02)
+  call hardware_io_port_write(1, $02, $00)
 end
 
 event connection_disconnected(handle,result)
-	#connection disconnected, continue advertising
+  #connection disconnected, continue advertising
     call gap_set_mode(gap_general_discoverable,gap_undirected_connectable)
 end
 
 event attributes_value(connection, reason, handle, offset, value_len, value_data)
-	call hardware_io_port_write(0, $04, $04)
-	n = 0
-	while n < 600
-		a(0:4) = z(0:4) 
-		a(0:4) = z(4:4) 
-		a(0:4) = z(8:4) 
-		a(0:4) = z(12:4)
-		a(0:4) = z(16:4)
-		a(0:4) = z(20:4) 
-		a(0:4) = z(24:4) 
-		a(0:4) = z(28:4) 
-		a(0:4) = z(32:4)
-		a(0:4) = z(36:4)
-		n = n + 1
-	end while
-	call hardware_io_port_write(0, $04, $00)
+  call hardware_io_port_write(1, $02, $02)
+  n = 0
+  while n < value_data(0:value_len)
+    a(0:4) = z(0:4)
+    a(0:4) = z(4:4)
+    a(0:4) = z(8:4)
+    a(0:4) = z(12:4)
+    a(0:4) = z(16:4)
+    a(0:4) = z(20:4)
+    a(0:4) = z(24:4)
+    a(0:4) = z(28:4)
+    a(0:4) = z(32:4)
+    a(0:4) = z(36:4)
+    n = n + 1
+  end while
+  call hardware_io_port_write(1, $02, $00)
 end
 
 #event system_script_failure(address, reason)
-	#call hardware_io_port_write(0, $04, $00)
-	#call attributes_write(xgatt_battery, 0, 4, reason)
+  #call hardware_io_port_write(0, $04, $00)
+  #call attributes_write(xgatt_battery, 0, 4, reason)
 #end

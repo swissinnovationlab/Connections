@@ -1,0 +1,16 @@
+Wed 27 Jul 2016 10:11:22 AM CEST
+got a drop 10 seconds after procedure finished
+could not capture the disconnect event while not implemented jet
+going to test the max procedure before it stops working
+
+
+Wed 27 Jul 2016 10:16:24 AM CEST
+got a drop just after the procedure finished when testing the LED configuration
+the led in on now when in procedure.
+
+
+Wed 27 Jul 2016 10:21:31 AM CEST
+drop after running through few procedures
+added more timestamps into gatttool for better loging
+for now in while with 600 the duration is 2048ms
+#will try to make a "connnection stress test" just to check for more drops
