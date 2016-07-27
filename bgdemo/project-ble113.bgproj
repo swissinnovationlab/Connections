@@ -4,7 +4,7 @@
     <hardware in="hardware.xml" />    
     <script in="bgdemo.bgs" />
     <image out="out-ble113.hex" />
-    <device type="ble113" />
+    <device type="ble113" memory="256"/>
     <boot fw="bootuart" />  
 	<config in="config.xml" />
 </project>
